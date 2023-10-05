@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client_Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/3a3bdd4bab.js" crossorigin="anonymous"></script>
+    <style>
+        .bg-body-tertiary {
+            background-color: #f8f9fa;
+        }
+        
+        .btn {
+            background-color: black;
+            color: aqua;
+            border-radius: 10px;
+            border: 10px;
+            transition: 0.3s ease;
+            /* text-decoration: none; */
+        }
+    </style>
+</head>
+
+<body class="bg-body-tertiary">
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h2>Please Enter Your Details!</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+
+                    <form id="contact-form">
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="firstName" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="lastName" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phoneno" class="form-label">Phone No</label>
+                            <input type="tel" class="form-control" id="phoneno" placeholder="123-456-7890" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="City" class="form-label">City</label>
+                            <select class="form-select" id="City" required>
+                                <option value="">Choose...</option>
+                                <option>Mumbai</option>
+                                <option>Delhi</option>
+                                <option>Chennai</option>
+                                <option>Bengaluru</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Location" class="form-label">Location</label>
+                            <select class="form-select" id="Location" required>
+                                <option value="">Choose...</option>
+                                <option>Borivali</option>
+                                <option>Andheri</option>
+                                <option>Delhi NCR</option>
+                                <option>Kandivali</option>
+                                <option>Gurgaon</option>
+                                <option>Marina Beach</option>
+                                <option>Bengaluru Palace</option>
+                            </select>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <button class="w-100 btn btn-primary btn-lg" type="submit">Sign In</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = {
+                    username: document.getElementById('firstName').value,
+                    lastname: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phoneno: document.getElementById('phoneno').value,
+                    address: document.getElementById('address').value,
+                    City: document.getElementById('City').value,
+                    Location: document.getElementById('Location').value,
+                };
+
+                fetch('http://localhost:8000/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message === 'Form submitted successfully!') {
+                            alert(data.message);
+                            contactForm.reset();
+                        } else {
+                            alert('Form submission failed. Please try again later.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again later.');
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>

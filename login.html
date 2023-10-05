@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        
+        h1 {
+            margin-top: 20px;
+        }
+        
+        .login-options {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .login-option {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Login Page</h1>
+    <p>Select an option to log in:</p>
+    <div class="login-options">
+        <button class="login-option"><a href="organizer.html">Organizer</a></button>
+        <button class="login-option"><a href="client_login.html">Client</a></button>
+        <button class="login-option"><a href="vendor.html">Vendor</a></button>
+    </div>
+
+    <script>
+        function selectUserType(userType) {
+            // Redirect to the appropriate login page based on the selected user type
+            if (userType === 'organizer') {
+                window.location.href = 'organizer-login.html'; // Replace with the actual organizer login page URL
+            } else if (userType === 'client') {
+                window.location.href = 'client-login.html'; // Replace with the actual client login page URL
+            } else if (userType === 'vendor') {
+                window.location.href = 'vendor-login.html'; // Replace with the actual vendor login page URL
+            }
+        }
+    </script>
+</body>
+
+</html>
